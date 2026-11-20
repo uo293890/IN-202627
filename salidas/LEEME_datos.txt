@@ -1,0 +1,70 @@
+ENTREGA DE DATOS - FRAN
+
+Qué se ha terminado
+- Etapa rápida de arranque (jueves en el PDF inicial; viernes mañana en el Word actualizado).
+- Preparación definitiva del viernes: variables, instancias, ausencias, transformaciones,
+  correlaciones y escalado. Notebook: notebooks/01_datos.ipynb.
+
+Qué deben leer los compañeros
+- salidas/hogares.csv: 2.475 filas, household_key y 7 variables preprocesadas.
+- salidas/hogares_sin_escalar.csv: exactamente las mismas filas, claves y columnas,
+  en unidades reales, sin logaritmos ni escalado.
+- Métodos debe excluir household_key de las entradas y conservarlo para mapas.csv.
+- Segmentos debe unir por household_key, no por número de fila.
+- No utilizar como entrega final los archivos de salidas/provisional/.
+
+Cambios respecto a las cifras orientativas del plan
+1. Se han calculado las 9 variables. Al aplicar su regla de quitar una variable cuando
+   |r|>0,9 después de las transformaciones quedan 7:
+   - productos_por_cesta se retira: r=0,922 con gasto_medio_cesta.
+   - regularidad se retira: r=-0,918 con n_visitas.
+   La tabla de 9 variables se conserva en salidas/diagnostico/ para revisar estos descartes.
+   Hay que comunicar esta diferencia al grupo antes de integrar la rama en main.
+2. Menos de 5 cestas: son 25 hogares DESPUÉS de quitar KIOSK-GAS.
+   La cifra 23 del plan corresponde al recuento previo sin esta exclusión.
+3. Se detectan 9 ausencias en regularidad antes del filtro. Después no queda ninguna:
+   la mediana está prevista como tratamiento, pero en este dataset no se usa.
+
+Columnas finales, en este orden
+household_key, n_visitas, gasto_medio_cesta, recencia, variedad,
+pct_marca_propia, pct_fresco, pct_descuento
+
+Unidades de la tabla SIN escalar
+- n_visitas y variedad: recuentos.
+- gasto_medio_cesta: dólares, no euros.
+- recencia: días desde la última cesta al día 711 del archivo completo.
+- pct_marca_propia y pct_fresco: proporciones 0-1; 0,25 significa 25%.
+- pct_descuento: descuento de tienda / gasto neto; también se guarda como razón,
+  no multiplicado por 100. No se recorta a 1 si alguna vez supera ese valor.
+
+Decisiones para explicar
+- Se leen 6 columnas de compras y 4 de productos. Los cupones no se leen como entradas.
+- La unión se valida como many_to_one para no multiplicar líneas.
+- Se excluye KIOSK-GAS antes de calcular nada. Se conservan las líneas con venta cero.
+- productos_por_cesta cuenta líneas del ticket, no QUANTITY.
+- regularidad usa días entre cestas; incluye intervalo 0 si hay varias el mismo día.
+  La desviación típica es muestral (ddof=1), así que con menos de 3 cestas puede faltar.
+- RETAIL_DISC se cambia de signo y se recorta por debajo en 0: los 36 valores positivos
+  originales no se interpretan como descuentos negativos.
+- Las categorías en blanco se etiquetan DESCONOCIDO (15 productos), sin inventar su clase.
+- log1p se aplica a variables no porcentuales con asimetría positiva >1.
+- La correlación se revisa después del logaritmo y antes de StandardScaler.
+- Como se describe el conjunto completo, no se usa un train/test de predicción.
+- Diferencias posteriores de uso de cupones son asociación, no prueba causal.
+
+Datos y reproducibilidad
+Fuente indicada por el grupo:
+https://www.kaggle.com/datasets/frtgnn/dunnhumby-the-complete-journey
+Los originales están en datos/ y NO se suben a GitHub. La descarga también está ahí.
+Los SHA-256 de los dos archivos usados, el escalador y las versiones están registrados
+ en salidas/preprocesado_datos.json. El notebook muestra las salidas de la ejecución real.
+
+Cómo ejecutar
+1. Instalar las dependencias del requirements.txt del grupo.
+2. Abrir notebooks/01_datos.ipynb con un kernel de ese entorno.
+3. Ejecutar todas las celdas en orden. La ejecución regenera las salidas de Datos.
+   No modifica archivos de Métodos ni Segmentos.
+
+Siguiente paso de coordinación
+Revisar estas decisiones en la rama datos antes de integrar en main.
+Esta entrega no calcula PCA, Isomap, t-SNE, UMAP, clusters ni validación de segmentos.

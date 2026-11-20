@@ -1,0 +1,130 @@
+{
+  "etapa": "definitiva",
+  "fuente": "Kaggle - frtgnn/dunnhumby-the-complete-journey",
+  "url_fuente": "https://www.kaggle.com/datasets/frtgnn/dunnhumby-the-complete-journey",
+  "archivos_entrada": {
+    "transaction_data.csv": "3a685c0729cef664d634486189f774518b84f53cde7cbf701a5963238692b476",
+    "product.csv": "7ecbcec41e0f1e5a51b43a359965cc50dc5586a2b900a378b64032750fedc949"
+  },
+  "resumen": {
+    "lineas_originales": 2595732,
+    "hogares_originales": 2500,
+    "cestas_originales": 276484,
+    "dia_inicial": 1,
+    "dia_final": 711,
+    "productos": 92353,
+    "lineas_gasolinera": 22059,
+    "gasto_gasolinera": 544222.28,
+    "lineas_sin_gasolinera": 2573673,
+    "hogares_sin_gasolinera": 2500,
+    "hogares_excluidos_pocas_cestas": 25,
+    "hogares_definitivos": 2475
+  },
+  "categorias_producto_desconocidas": {
+    "DEPARTMENT": 15,
+    "BRAND": 0,
+    "COMMODITY_DESC": 15
+  },
+  "minimo_cestas": 5,
+  "regularidad": "Desviación muestral (ddof=1) de intervalos entre cestas ordenadas por DAY; se incluyen ceros del mismo día",
+  "frescos": [
+    "PRODUCE",
+    "MEAT",
+    "MEAT-PCKGD",
+    "DELI",
+    "SEAFOOD",
+    "SEAFOOD-PCKGD",
+    "SALAD BAR"
+  ],
+  "columnas_log1p": [
+    "n_visitas",
+    "gasto_medio_cesta",
+    "productos_por_cesta",
+    "recencia",
+    "regularidad"
+  ],
+  "medianas_si_hay_ausencia": {
+    "n_visitas": 75.0,
+    "gasto_medio_cesta": 27.68809523809524,
+    "productos_por_cesta": 9.6,
+    "recencia": 6.0,
+    "regularidad": 10.217811579266263,
+    "variedad": 118.0,
+    "pct_marca_propia": 0.22143002648197188,
+    "pct_fresco": 0.24860541460321536,
+    "pct_descuento": 0.18071740787322688
+  },
+  "valores_imputados": {
+    "n_visitas": 0,
+    "gasto_medio_cesta": 0,
+    "productos_por_cesta": 0,
+    "recencia": 0,
+    "regularidad": 0,
+    "variedad": 0,
+    "pct_marca_propia": 0,
+    "pct_fresco": 0,
+    "pct_descuento": 0
+  },
+  "variables_candidatas": [
+    "n_visitas",
+    "gasto_medio_cesta",
+    "productos_por_cesta",
+    "recencia",
+    "regularidad",
+    "variedad",
+    "pct_marca_propia",
+    "pct_fresco",
+    "pct_descuento"
+  ],
+  "variables_definitivas": [
+    "n_visitas",
+    "gasto_medio_cesta",
+    "recencia",
+    "variedad",
+    "pct_marca_propia",
+    "pct_fresco",
+    "pct_descuento"
+  ],
+  "retiradas_correlacion_mayor_0_9": [
+    "productos_por_cesta",
+    "regularidad"
+  ],
+  "unidades_proporciones": "pct_marca_propia y pct_fresco: 0-1; pct_descuento: razón descuento/gasto neto",
+  "escalado": {
+    "n_visitas": {
+      "media": 4.249528202820437,
+      "escala": 0.9231270615068976
+    },
+    "gasto_medio_cesta": {
+      "media": 3.337677997153454,
+      "escala": 0.5833908367559842
+    },
+    "recencia": {
+      "media": 2.0683784972287818,
+      "escala": 1.4445066037778067
+    },
+    "variedad": {
+      "media": 116.17050505050506,
+      "escala": 45.04248072033659
+    },
+    "pct_marca_propia": {
+      "media": 0.23306112416187505,
+      "escala": 0.09882894343006625
+    },
+    "pct_fresco": {
+      "media": 0.25548204207486935,
+      "escala": 0.10211670702476892
+    },
+    "pct_descuento": {
+      "media": 0.19469285620160443,
+      "escala": 0.08023961968110409
+    }
+  },
+  "semilla_comun": 42,
+  "versiones": {
+    "python": "3.14.4",
+    "pandas": "3.0.5",
+    "numpy": "2.5.3",
+    "scikit-learn": "1.9.1"
+  }
+}
