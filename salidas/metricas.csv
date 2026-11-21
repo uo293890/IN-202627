@@ -1,0 +1,8 @@
+metodo,parametro,confianza,distancias
+PCA,-,0.816,0.781
+Isomap,10 vecinos,0.815,0.763
+Isomap,30 vecinos,0.819,0.771
+t-SNE,perplejidad 30,0.979,0.629
+t-SNE,perplejidad 50,0.978,0.615
+UMAP,15 vecinos,0.924,0.649
+UMAP,50 vecinos,0.884,0.646
